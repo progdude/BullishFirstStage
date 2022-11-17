@@ -18,13 +18,19 @@ public class DatabaseClient {
     private HashMap<UUID, User> userMapping;
     private HashMap<String, Boolean> productDealMapping;
 
+    /*
+    Class that *would* speak to our persistent storage if it existed.
+    To emulate, I'm just using a series of hashmaps
+     */
     public DatabaseClient(){
         this.productMapping = new HashMap<UUID, Product>();
         this.userMapping = new HashMap<UUID, User>();
         this.productDealMapping = new HashMap<String, Boolean>();
     }
 
-    public void saveOrUpdateProduct(Product product) { this.productMapping.put(product.getId(), product); }
+    public void saveOrUpdateProduct(Product product) {
+        this.productMapping.put(product.getId(), product);
+    }
 
     public Product getProduct(UUID id) {
         if (!this.productMapping.containsKey(id)){

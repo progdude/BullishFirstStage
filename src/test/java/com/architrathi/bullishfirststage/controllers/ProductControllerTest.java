@@ -19,7 +19,7 @@ class ProductControllerTest {
     private AnnotationConfigApplicationContext context = Mockito.mock(AnnotationConfigApplicationContext.class);
 
     @Test
-    void createOrUpdateProduct() {
+    public void createOrUpdateProduct() {
         // Creating the product
         UUID uuid = UUID.randomUUID();
         Product actual = new Product(uuid.toString(), "Broom", ProductCategory.CLEANING, 10.5);
@@ -45,7 +45,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void deleteProduct(){
+    public void deleteProduct(){
         // Creating the product and adding it to the db
         UUID uuid = UUID.randomUUID();
         Product actual = new Product(uuid.toString(), "Broom", ProductCategory.CLEANING, 10.5);
@@ -62,7 +62,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void getProduct() {
+    public void getProduct() {
         // Creating the product and adding it to the db
         UUID uuid = UUID.randomUUID();
         Product actual = new Product(uuid.toString(), "Broom", ProductCategory.CLEANING, 10.5);

@@ -10,6 +10,9 @@ public class Config {
 
     public static Config config = new Config();
 
+    /*
+    Function that helps us determine which user has access to which API endpoints
+     */
     public static List<OperationAccess> getOperationAccessFromRoles(Role role){
          if (role == Role.ADMIN){
             return Arrays.asList(OperationAccess.CUSTOMER_READ, OperationAccess.CUSTOMER_WRITE, OperationAccess.PRODUCT_READ, OperationAccess.PRODUCT_WRITE, OperationAccess.PRODUCT_DEAL_WRITE);

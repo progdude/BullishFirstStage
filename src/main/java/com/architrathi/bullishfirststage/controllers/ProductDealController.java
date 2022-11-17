@@ -22,6 +22,9 @@ public class ProductDealController {
         this.databaseClient = context.getBean(DatabaseClient.class);
     }
 
+    /*
+    Endpoint to update or add the status of a product deal
+     */
     @GetMapping("/productDeal")
     public ResponseEntity createOrUpdateProductDeal(@RequestParam(value = "productDeal") String productDeal, @RequestParam(value = "productDealStatus") boolean productDealStatus, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.PRODUCT_DEAL_WRITE)){

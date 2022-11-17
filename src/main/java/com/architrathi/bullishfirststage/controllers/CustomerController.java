@@ -24,6 +24,9 @@ public class CustomerController {
         this.databaseClient = context.getBean(DatabaseClient.class);
     }
 
+    /*
+    Endpoint to add a customer
+     */
     @PostMapping("/customer")
     public ResponseEntity createOrUpdateCustomer(@RequestBody Customer customer, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_WRITE)){
@@ -34,6 +37,9 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /*
+    Endpoint to retrieve a customer
+     */
     @GetMapping("/customer")
     public ResponseEntity<Customer> getCustomer(@RequestParam(value = "id") String id, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_READ)){
@@ -48,6 +54,9 @@ public class CustomerController {
         return new ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 
+    /*
+    Endpoint to add product to cart
+     */
     @PostMapping("/customer/add/product")
     public ResponseEntity addProductToCart(@RequestParam(value = "id") String customer_id,@RequestBody Product product, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_WRITE)){
@@ -60,6 +69,9 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /*
+    Endpoint to remove product from cart
+     */
     @PostMapping("/customer/remove/product")
     public ResponseEntity removeProducFromCart(@RequestParam(value = "id") String customer_id,@RequestBody Product product, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_WRITE)){
@@ -72,6 +84,9 @@ public class CustomerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /*
+    Endpoing to Calcualte the bill
+     */
     @GetMapping("/customer/bill")
     public ResponseEntity<Double> calculateBill(@RequestParam(value = "id") String id, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_READ)){

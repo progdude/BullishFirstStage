@@ -21,7 +21,7 @@ class CustomerControllerTest {
     private AnnotationConfigApplicationContext context = Mockito.mock(AnnotationConfigApplicationContext.class);
 
     @Test
-    void createOrUpdateCustomer() {
+    public void createOrUpdateCustomer() {
         UUID uuid = UUID.randomUUID();
         Customer expected = new Customer(uuid.toString(), "username_1", "name_1", Role.ADMIN);
         when(this.context.getBean(DatabaseClient.class)).thenReturn(this.databaseClient);
@@ -36,7 +36,7 @@ class CustomerControllerTest {
     }
 
     @Test
-    void calculateBill() {
+    public void calculateBill() {
         // Create all the necessary classes
         UUID uuid = UUID.randomUUID();
         Customer expected = new Customer(uuid.toString(), "username_1", "name_1", Role.ADMIN);

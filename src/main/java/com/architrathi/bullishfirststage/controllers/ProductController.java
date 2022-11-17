@@ -23,6 +23,9 @@ public class ProductController {
         this.databaseClient = context.getBean(DatabaseClient.class);
     }
 
+    /*
+    Endpoint to create or update the product
+     */
     @PostMapping("/product")
     public ResponseEntity createOrUpdateProduct(@RequestBody Product newProduct, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.PRODUCT_WRITE)){
@@ -33,6 +36,9 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /*
+    Endpoint to delete the product
+     */
     @GetMapping("/product/delete")
     public ResponseEntity deleteProduct(@RequestParam(value = "id") String id, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.PRODUCT_WRITE)){
@@ -43,6 +49,9 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /*
+    Endpoint to retrieve the product
+     */
     @GetMapping("/product")
     public ResponseEntity<Product> getProduct(@RequestParam(value = "id") String id, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.PRODUCT_READ)){
