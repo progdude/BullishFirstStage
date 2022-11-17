@@ -48,7 +48,7 @@ public class Customer implements User {
     }
 
     public double calculateBill(){
-        ProductDeals.productDeals.applyDeals(this.products);
+        ProductDeals.getInstance().applyDeals(this.products);
         return this.products.stream().mapToDouble(Product::getPrice).sum();
     }
 }

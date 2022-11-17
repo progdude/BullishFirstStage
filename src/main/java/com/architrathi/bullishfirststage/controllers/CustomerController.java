@@ -61,7 +61,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customer/remove/product")
-    public ResponseEntity removeProductToCart(@RequestParam(value = "id") String customer_id,@RequestBody Product product, @RequestHeader("FakeAuth") Role role){
+    public ResponseEntity removeProducFromCart(@RequestParam(value = "id") String customer_id,@RequestBody Product product, @RequestHeader("FakeAuth") Role role){
         if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_WRITE)){
             return new ResponseEntity(HttpStatus.FORBIDDEN);
         }
@@ -70,6 +70,20 @@ public class CustomerController {
         customer.removeProduct(product);
         this.databaseClient.saveOrUpdateUser(customer);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/customer/bill")
+    public ResponseEntity<Double> calculateBill(@RequestParam(value = "id") String id, @RequestHeader("FakeAuth") Role role){
+        if (!Config.getOperationAccessFromRoles(role).contains(OperationAccess.CUSTOMER_READ)){
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+
+        Customer customer = (Customer)this.databaseClient.getUser(UUID.fromString(id));
+        if (customer == null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<Double>(customer.calculateBill(), HttpStatus.OK);
     }
 
 }

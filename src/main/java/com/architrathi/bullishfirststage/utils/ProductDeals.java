@@ -2,11 +2,12 @@ package com.architrathi.bullishfirststage.utils;
 
 import com.architrathi.bullishfirststage.clients.DatabaseClient;
 import com.architrathi.bullishfirststage.config.AppConfig;
-import com.architrathi.bullishfirststage.config.Config;
 import com.architrathi.bullishfirststage.models.Product;
 import com.architrathi.bullishfirststage.models.interfaces.ProductDeal;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,12 +16,20 @@ public class ProductDeals {
     private DatabaseClient databaseClient;
     private HashMap<String, ProductDeal> productDealMapping = new HashMap<>();
 
-    public static ProductDeals productDeals = new ProductDeals();
+    public static ProductDeals productDeals;
 
     public ProductDeals(){
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         this.databaseClient = context.getBean(DatabaseClient.class);
         this.setupDealMapping();
+    }
+
+    public static ProductDeals getInstance()
+    {
+        if (productDeals == null)
+            productDeals = new ProductDeals();
+
+        return productDeals;
     }
 
     public void applyDeals(List<Product> products){

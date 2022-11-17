@@ -4,7 +4,6 @@ import com.architrathi.bullishfirststage.models.OperationAccess;
 import com.architrathi.bullishfirststage.models.Role;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class Config {
@@ -16,7 +15,7 @@ public class Config {
             return Arrays.asList(OperationAccess.CUSTOMER_READ, OperationAccess.CUSTOMER_WRITE, OperationAccess.PRODUCT_READ, OperationAccess.PRODUCT_WRITE, OperationAccess.PRODUCT_DEAL_WRITE);
          }
          else if (role == Role.CUSTOMER){
-             return Arrays.asList(OperationAccess.PRODUCT_READ);
+             return Arrays.asList(OperationAccess.PRODUCT_READ, OperationAccess.CUSTOMER_READ, OperationAccess.CUSTOMER_WRITE);
          }
          else{
              return Arrays.asList();
